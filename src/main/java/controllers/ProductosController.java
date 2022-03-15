@@ -11,10 +11,10 @@ public class ProductosController {
     List<Producto> productosRepository = new ArrayList<>();
 
     private ProductosController() {
-        productosRepository.add(new Producto("Producto 1", 10, 10));
-        productosRepository.add(new Producto(" Productpo 2", 15.5, 5));
-        productosRepository.add(new Producto("Producto 3",  24, 7));
-        productosRepository.add(new Producto("Producto 4", 23.5, 67));
+        productosRepository.add(new Producto("Menú 1", 10, 10));
+        productosRepository.add(new Producto("Menú 2", 15.5, 5));
+        productosRepository.add(new Producto("Menú 3",  24, 7));
+        productosRepository.add(new Producto("Menú 4", 23.5, 67));
     }
 
     public static ProductosController getInstance() {

@@ -79,10 +79,6 @@ public class UsuariosController {
     public Persona actualizarUsuarioPorNombre(String nombre, Persona nuevosDatos) {
         var persona = buscarPorNombre(nombre);
         if (persona != null) {
-            /*int index = personaRepository.indexOf(persona);
-            persona.setNombre(nuevosDatos.getNombre());
-            persona.setEdad(nuevosDatos.getEdad());
-            personaRepository.set(index, persona);*/
             persona.setNombre(nuevosDatos.getNombre());
             persona.setEdad(nuevosDatos.getEdad());
             return persona;
@@ -96,7 +92,6 @@ public class UsuariosController {
      * @return Lista de usuarios
      */
     public List<Persona> obtenerTodos() {
-        // Es facil :)
         return personaRepository;
     }
 }
