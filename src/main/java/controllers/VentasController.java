@@ -1,7 +1,7 @@
 package controllers;
 
 import models.LineaVenta;
-import models.Persona;
+import models.Cliente;
 import models.Producto;
 import models.Venta;
 
@@ -34,7 +34,7 @@ public class VentasController {
      * @return Venta creada
      * @throws Exception Si no se puede crear la venta o existe problemas de stock
      */
-    public Venta realizarVenta(Persona cliente, Map<Integer, Integer> datosLinea) throws Exception {
+    public Venta realizarVenta(Cliente cliente, Map<Integer, Integer> datosLinea) throws Exception {
         Venta venta = new Venta(cliente);
         for (int id: datosLinea.keySet()) {
             Producto producto = productosController.getProducto(id);

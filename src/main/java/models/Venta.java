@@ -7,12 +7,12 @@ import java.util.List;
 public class Venta {
     private int id;
     private LocalDateTime createdAt;
-    private Persona persona;
+    private Cliente cliente;
     List<LineaVenta> lineasVenta;
     private double total;
 
-    public Venta(Persona persona) {
-        this.persona = persona;
+    public Venta(Cliente cliente) {
+        this.cliente = cliente;
         this.createdAt = LocalDateTime.now();
         this.lineasVenta = new ArrayList<>();
     }
@@ -25,8 +25,8 @@ public class Venta {
         return createdAt;
     }
 
-    public Persona getPersona() {
-        return persona;
+    public Cliente getPersona() {
+        return cliente;
     }
 
 
@@ -60,7 +60,7 @@ public class Venta {
         return "Venta{" +
                 "id=" + id +
                 ", createdAt=" + createdAt +
-                ", persona=" + persona +
+                ", cliente=" + cliente +
                 ", lineasVenta=" + lineasVenta +
                 ", total=" + total +
                 '}';

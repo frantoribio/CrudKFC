@@ -16,5 +16,4 @@ public interface ICRUDRepository<T, ID> {
 
     T deleteById(ID id);
 
-    Producto delete(Producto producto);
 }

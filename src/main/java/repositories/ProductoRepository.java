@@ -64,7 +64,8 @@ public class ProductoRepository extends TreeMap<String, Producto> implements ICR
      * @param producto producto a eliminar
      * @return el pais eliminado
      */
-    @Override
+
+
     public Producto delete(Producto producto) {
         return this.remove(producto.getNombre());
     }

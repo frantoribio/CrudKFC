@@ -2,13 +2,25 @@ package models;
 
 import java.util.Objects;
 
-public class Persona {
+public class Cliente {
+
+    private static int contador = 0;
+    private final int id;
     private String nombre;
     private int edad;
 
-    public Persona(String nombre, int edad) {
+    public Cliente() {
+        this.id = ++contador;
+    }
+
+    public Cliente(String nombre, int edad) {
+        this.id = ++contador;
         this.nombre = nombre;
         this.edad = edad;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNombre() {
@@ -29,8 +41,9 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" +
-                "nombre='" + nombre + '\'' +
+        return "Cliente{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
                 ", edad=" + edad +
                 '}';
     }
@@ -38,13 +51,15 @@ public class Persona {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Persona)) return false;
-        Persona persona = (Persona) o;
-        return edad == persona.edad && Objects.equals(nombre, persona.nombre);
+        if (!(o instanceof Cliente)) return false;
+        Cliente cliente = (Cliente) o;
+        return id == cliente.id
+                && getEdad() == cliente.getEdad()
+                && getNombre().equals(cliente.getNombre());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre, edad);
+        return Objects.hash(id, getNombre(), getEdad());
     }
 }

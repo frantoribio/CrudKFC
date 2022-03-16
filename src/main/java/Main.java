@@ -1,26 +1,56 @@
-import controllers.UsuariosController;
+import controllers.ProductosController;
+import controllers.ClientesController;
 import controllers.VentasController;
-import models.Persona;
+import models.Cliente;
 import utils.Console;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
+
+    private static final ClientesController userController = ClientesController.getInstance();
+    private static final VentasController ventasController = VentasController.getInstance();
+    private static final ProductosController productosController = ProductosController.getInstance();
+
     public static void main(String[] args) {
-        secuenciaCRUD();
-        secuenciaVentas();
 
         System.out.println("KFC");
         System.out.println("=================");
         // Bucle infinito a la espera de una opción o salir
         do {
             System.out.println();
-            System.out.println("1. Crear pedido");
-            System.out.println("2. Eliminar pedido");
-            System.out.println("3. Actualizar pedido");
-            System.out.println("4. Mostrar pedidos");
-            System.out.println("5. Salir");
+            System.out.println("1. Gestionar clientes");
+            System.out.println("2. Gestionar ventas");
+            System.out.println("3. Salir");
+            String opcion = Console.getString("Elige una opción [1-5]: ");
+            // Expresion regular para validar la opción
+            var regex = "[1-3]";
+            if (opcion.matches(regex)) {
+                switch (opcion) {
+                    case "1":
+                        gestionClientes();
+                        break;
+                    case "2":
+                        //gestionPedidos();
+                        break;
+                    case "3":
+                        salir();
+                        break;
+                }
+            }
+        } while (true);
+    }
+
+    public static void gestionClientes() {
+        do {
+            System.out.println();
+            System.out.println("1. Crear cliente nuevo");
+            System.out.println("2. Buscar cliente");
+            System.out.println("3. Actualizar cliente");
+            System.out.println("4. Eliminar cliente");
+            System.out.println("5. Mostrar clientes");
+            System.out.println("6. Salir");
             System.out.println();
             String opcion = Console.getString("Elige una opción [1-5]: ");
             // Expresion regular para validar la opción
@@ -28,18 +58,21 @@ public class Main {
             if (opcion.matches(regex)) {
                 switch (opcion) {
                     case "1":
-                        //metodo();
+                        nuevoCliente();
                         break;
                     case "2":
-
+                        buscarCliente();
                         break;
                     case "3":
-
+                        actualizarCliente();
                         break;
                     case "4":
-
+                        eliminarCliente();
                         break;
                     case "5":
+                        mostrarClientes();
+                        break;
+                    case "6":
                         salir();
                         break;
                 }
@@ -55,8 +88,58 @@ public class Main {
         System.exit(0);
     }
 
+    private static void nuevoCliente() {
+        var sal = userController.crearUsuario(Console.
+                getString("Introduce tu nombre"),Console.getInt("Introduce tu edad"));
+        if (sal!=null) {
+            System.out.println("Usuario creado: " + sal);
+        } else {
+            System.out.println("Usuario no creado");
+        }
+    }
+
+    private static void buscarCliente() {
+        var sal2 = userController.buscarPorNombre(Console.getString("Introduce el nombre"));
+        if (sal2 != null) {
+            System.out.println("Usuario encontrado: " + sal2);
+        } else {
+            System.out.println("Usuario no encontrado");
+        }
+    }
+
+    private static void actualizarCliente() {
+        var nuevosDatos = new Cliente(Console.getString("Introduce el nombre"),Console
+                .getInt("Introduce tu edad"));
+        var sal3 = userController.actualizarUsuarioPorNombre(Console
+                .getString("Introduce el nombre"), nuevosDatos);
+        if (sal3 != null) {
+            System.out.println("Usuario actualizado: " + sal3);
+        } else {
+            System.out.println("Usuario no actualizado");
+        }
+    }
+
+    private static void eliminarCliente() {
+        System.out.println("4. Delete: Eliminar usuario");
+        var sal4 = userController.eliminarPorPorNombre(Console.
+                getString("Introduce el nombre"));
+        if (sal4!=null) {
+            System.out.println("Usuario eliminado: " + sal4);
+        } else {
+
+            System.out.println("Usuario no eliminado");
+        }
+    }
+
+    private static void mostrarClientes() {
+        var res = userController.obtenerTodos();
+        if (res != null) {
+            System.out.println("Usuarios encontrados: " + res);
+        }
+    }
+
     private static void secuenciaVentas() {
-        var userController = UsuariosController.getInstance();
+        var userController = ClientesController.getInstance();
         var ventasController = VentasController.getInstance();
 
         System.out.println();
@@ -65,7 +148,8 @@ public class Main {
         System.out.println("");
 
         // Creamos o buscamos el cliente
-        var cliente = userController.crearUsuario("joseluis", 20);
+        var cliente = userController.crearUsuario(Console.
+                getString("Introduce tu nombre"),Console.getInt("Introduce tu edad"));
 
         Map<Integer,Integer> datosLinea = new HashMap<>();
         datosLinea.put(1,1);
@@ -79,74 +163,6 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
-    private static void secuenciaCRUD() {
-        var userController = UsuariosController.getInstance();
-
-        System.out.println();
-        System.out.println("Secuencia de CRUD");
-        System.out.println("================");
-        System.out.println("");
-        System.out.println("1. Create: Crear usuario");
-
-        var sal = userController.crearUsuario("joseluis", 20);
-        if (sal!=null) {
-            System.out.println("Usuario creado: " + sal);
-        } else {
-            System.out.println("Usuario no creado");
-        }
-
-        System.out.println("");
-        System.out.println("2. Read: Buscar usuario");
-        var sal2 = userController.buscarPorNombre("joseluis");
-        if (sal2 != null) {
-            System.out.println("Usuario encontrado: " + sal2);
-        } else {
-            System.out.println("Usuario no encontrado");
-        }
-
-        System.out.println("");
-        System.out.println("3. Update: Actualizar usuario");
-        var nuevosDatos = new Persona("pepe",22);
-        var sal3 = userController.actualizarUsuarioPorNombre("joseluis", nuevosDatos);
-        if (sal3 != null) {
-            System.out.println("Usuario actualizado: " + sal3);
-        } else {
-            System.out.println("Usuario no actualizado");
-        }
-
-        sal2 = userController.buscarPorNombre("pepe");
-        if (sal2 != null) {
-            System.out.println("Usuario encontrado: " + sal2);
-        } else {
-            System.out.println("Usuario no encontrado");
-        }
-
-        System.out.println("");
-        System.out.println("4. Delete: Eliminar usuario");
-        var sal4 = userController.eliminarPorPorNombre("pepe");
-        if (sal4!=null) {
-            System.out.println("Usuario eliminado: " + sal4);
-        } else {
-
-            System.out.println("Usuario no eliminado");
-        }
-
-        System.out.println("");
-        System.out.println("5. ReadAll: Obtener todos");
-        userController.crearUsuario("persona 1", 20);
-        userController.crearUsuario("persona 2", 30);
-        userController.crearUsuario("persona 3", 50);
-        userController.crearUsuario("persona 4", 25);
-        var res = userController.obtenerTodos();
-        if (res != null) {
-            System.out.println("Usuarios encontrados: " + res);
-        }
-
-
-    }
-
 }
 
