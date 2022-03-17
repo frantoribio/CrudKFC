@@ -34,13 +34,15 @@ public class VentasController {
      * @return Venta creada
      * @throws Exception Si no se puede crear la venta o existe problemas de stock
      */
-    public Venta realizarVenta(Cliente cliente, Map<Integer, Integer> datosLinea) throws Exception {
+    public Venta realizarVenta(Cliente cliente, Map<Integer, Integer> datosLinea)
+            throws Exception {
         Venta venta = new Venta(cliente);
         for (int id: datosLinea.keySet()) {
             Producto producto = productosController.getProducto(id);
             var exist = producto.getStock();
             if (exist > 0 && exist >= datosLinea.get(id)) {
-                // Actualizo el stock. Como va por referencia se ha actualizado, si no fuerzo, como si fuera una BBDD
+                // Actualizo el stock. Como va por referencia se ha actualizado,
+                // si no fuerzo, como si fuera una BBDD
                 productosController.actualizarExistencias(id, datosLinea.get(id));
                 // Creo la línea de venta
                 LineaVenta linea = new LineaVenta(producto, datosLinea.get(id));
@@ -48,7 +50,8 @@ public class VentasController {
                 venta.insertarLinea(linea);
 
             } else {
-                throw new Exception("No hay stock suficiente para el producto " + producto.getNombre());
+                throw new Exception("No hay stock suficiente para el producto "
+                        + producto.getNombre());
             }
         }
         // Calculo el total

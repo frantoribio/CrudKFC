@@ -57,13 +57,13 @@ public class Venta {
 
     @Override
     public String toString() {
-        return "Venta{" +
+        return "Venta {" +
                 "id=" + id +
-                ", createdAt=" + createdAt +
-                ", cliente=" + cliente +
-                ", lineasVenta=" + lineasVenta +
-                ", total=" + total +
-                '}';
+                ", fecha y hora->" + createdAt +
+                ", cliente: " + cliente +
+                ", lineasVenta: " + lineasVenta +
+                ", total = " + total + "€}";
+
     }
 }
 

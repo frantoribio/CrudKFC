@@ -38,8 +38,6 @@ public class LineaVenta {
         return total;
     }
 
-
-
     @Override
     public String toString() {
         return "LineaVenta{" +

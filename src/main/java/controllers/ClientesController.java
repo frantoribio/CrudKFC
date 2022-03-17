@@ -3,7 +3,6 @@ package controllers;
 import exceptions.ClientesExceptions;
 import models.Cliente;
 import repositories.ClientesRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +13,10 @@ public class ClientesController {
     // Repositorio de la información
     List<Cliente> listaClientesRepository = new ArrayList<>();
 
-
-
     private ClientesController(ClientesRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
         initRepositoryData();
     }
-
 
     public static ClientesController getInstance() {
         if (instance == null) {
@@ -31,7 +27,6 @@ public class ClientesController {
 
     /**
      * Añade un usuario al repositorio
-     *
      * @param nombre Nombre del usuario
      * @param edad   Edad del usuario
      * @return El usuario creado o null si no se ha podido crear
@@ -45,6 +40,7 @@ public class ClientesController {
             return null;
         }
     }
+
     public Cliente crearCliente(Cliente cliente) throws ClientesExceptions {
         // Comprobamos que no haya datos incorrectos, por si ha fallado la interfaz
         checkClienteData(cliente);
@@ -57,7 +53,6 @@ public class ClientesController {
         throw new ClientesExceptions("Ya existe un cliente con el id " + cliente.getId());
     }
 
-
     /**
      * Busca un usuario por su nombre
      *
@@ -65,7 +60,6 @@ public class ClientesController {
      * @return El usuario o null si no se ha encontrado
      */
     public Cliente buscarPorNombre(String nombre) {
-        // Search for the user
         for (var persona : listaClientesRepository) {
             if (persona.getNombre().equals(nombre)) {
                 return persona;
@@ -76,12 +70,10 @@ public class ClientesController {
 
     /**
      * Busca un usuario por su id
-     *
      * @param id id del usuario
      * @return El usuario o null si no se ha encontrado
      */
     public Cliente buscarPorId(int id) {
-        // Search for the user
         for (var cliente : listaClientesRepository) {
             if (cliente.getId() == id) {
                 return cliente;
@@ -92,7 +84,6 @@ public class ClientesController {
 
     /**
      * Elimina un usuario del repositorio dado su nombre
-     *
      * @param nombre Nombre del usuario
      * @return El usuario o null si no se ha completado con éxito
      */
@@ -111,7 +102,6 @@ public class ClientesController {
 
     /**
      * Elimina un usuario del repositorio dado su id
-     *
      * @param id id del cliente
      * @return El cliente o null si no se ha completado con éxito
      */
@@ -130,8 +120,7 @@ public class ClientesController {
 
     /**
      * Actualiza los datos de una persona
-     *
-     * @param nombre      nombre de la persona a cambiar los datos
+     * @param nombre nombre de la persona a cambiar los datos
      * @param nuevosDatos nuevos datos de la persona
      * @return El usuario o null si no se ha completado con éxito
      */
@@ -148,7 +137,6 @@ public class ClientesController {
 
     /**
      * Devuelve todos los usuarios del repositorio
-     *
      * @return Lista de usuarios
      */
     public List<Cliente> obtenerTodos() {
@@ -156,7 +144,6 @@ public class ClientesController {
     }
 
     private void initRepositoryData() {
-
         this.listaClientesRepository.add(new Cliente("Francisco", 42));
         this.listaClientesRepository.add(new Cliente("Laura", 40));
         this.listaClientesRepository.add(new Cliente("Elena", 30));
@@ -165,7 +152,6 @@ public class ClientesController {
 
     /**
      * Comprueba que los datos del cliente son correctos
-     *
      * @param cliente
      * @throws ClientesExceptions
      */

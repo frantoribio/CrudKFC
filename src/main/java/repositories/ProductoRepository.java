@@ -10,7 +10,8 @@ import java.util.TreeMap;
 /**
  * Repository para los productos siguiendo el TDA Mapa
  */
-public class ProductoRepository extends TreeMap<String, Producto> implements ICRUDRepository<Producto, Integer> {
+public class ProductoRepository extends TreeMap<String, Producto>
+        implements ICRUDRepository<Producto, Integer> {
 
     /**
      * Busca un producto por su nombre
@@ -64,8 +65,6 @@ public class ProductoRepository extends TreeMap<String, Producto> implements ICR
      * @param producto producto a eliminar
      * @return el pais eliminado
      */
-
-
     public Producto delete(Producto producto) {
         return this.remove(producto.getNombre());
     }

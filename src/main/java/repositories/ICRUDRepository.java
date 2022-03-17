@@ -1,8 +1,5 @@
 package repositories;
 
-
-import models.Producto;
-
 import java.util.List;
 
 public interface ICRUDRepository<T, ID> {
