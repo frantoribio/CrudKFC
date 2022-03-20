@@ -25,7 +25,7 @@ public class Venta {
         return createdAt;
     }
 
-    public Cliente getPersona() {
+    public Cliente getCliente() {
         return cliente;
     }
 

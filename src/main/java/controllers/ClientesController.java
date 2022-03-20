@@ -60,9 +60,9 @@ public class ClientesController {
      * @return El usuario o null si no se ha encontrado
      */
     public Cliente buscarPorNombre(String nombre) {
-        for (var persona : listaClientesRepository) {
-            if (persona.getNombre().equals(nombre)) {
-                return persona;
+        for (var cliente : listaClientesRepository) {
+            if (cliente.getNombre().equals(nombre)) {
+                return cliente;
             }
         }
         return null;

@@ -60,11 +60,12 @@ public class Menu {
             System.out.println("3. Actualizar cliente");
             System.out.println("4. Eliminar cliente");
             System.out.println("5. Mostrar clientes");
-            System.out.println("6. Salir");
+            System.out.println("6. Gestionar pedidos");
+            System.out.println("7. Salir");
             System.out.println();
             String opcion = Console.getString("Elige una opción [1-6]: ");
             // Expresion regular para validar la opción
-            var regex = "[1-6]";
+            var regex = "[1-7]";
             if (opcion.matches(regex)) {
                 switch (opcion) {
                     case "1":
@@ -83,6 +84,9 @@ public class Menu {
                         mostrarClientes();
                         break;
                     case "6":
+                        gestionVentas();
+                        break;
+                    case "7":
                         salir();
                         break;
                 }
